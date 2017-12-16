@@ -1,96 +1,48 @@
-import sys
-import pygame
-from pygame.locals import *
-import pymunk
-from pymunk import pygame_util
-import random
+import sys, os, random, math
+import pyglet
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((600,600))
-    pygame.display.set_caption("Blah!")
-    clock = pygame.time.Clock()
+sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
+from rolympics import resources as res
+from rolympics import config
+from rolympics.physical_object import PhysicalObject
+from rolympics.robots import walker
 
-    space = pymunk.Space()
-    space.gravity = (0.0, -900.0)
+gl_config = pyglet.gl.Config(sample_buffers=1, samples=2, double_buffer=True)
+window = pyglet.window.Window(config.width, config.height, config=gl_config, vsync = False)
 
-    #lines = add_static_L(space)
-    lines = add_L(space)
-    balls = []
-    print(dir(pymunk))
-    draw_options = pymunk.pygame_util.DrawOptions(screen)
+pyglet.gl.glClearColor(1,1,1,1)
 
-    ticks_to_next_ball = 10
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                sys.exit(0)
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                sys.exit(0)
+def update(dt):
+    for obj in res.game_objects:
+        obj.update(dt)
 
-        ticks_to_next_ball -= 1
-        if ticks_to_next_ball <= 0:
-            ticks_to_next_ball = 25
-            ball_shape = add_ball(space)
-            balls.append(ball_shape)
+    #func = walker.step(res.robot.position, ((0,0),(config.width,config.height)))
+    #func[0](res.robot, *func[1:])
+    #action(res.robot, *args)
 
-        screen.fill((255,255,255))
+fps_display = pyglet.clock.ClockDisplay()
 
-        balls_to_remove = []
-        for ball in balls:
-            if ball.body.position.y < 150:
-                space.remove(ball, ball.body)
-                balls.remove(ball)
-                
-        space.debug_draw(draw_options)
-
-        space.step(1/50.0)
-        
-        pygame.display.flip()
-        clock.tick(50)
-
-def add_ball(space):
-    mass = 1
-    radius = 14
-    moment = pymunk.moment_for_circle(mass, 0, radius)
-    body = pymunk.Body(mass, moment)
-    x = random.randint(120,380)
-    body.position = x, 550
-    shape = pymunk.Circle(body,radius)
-    space.add(body,shape)
-    return shape
-
-def draw_ball(screen, ball):
-    p = int(ball.body.position.x), 600-int(ball.body.position.y)
-    pygame.draw.circle(screen, (0,0,255), p, int(ball.radius), 2)
-
-def add_static_L(space):
-    body = pymunk.Body(body_type = pymunk.Body.STATIC)
-    body.position = (300,300)
-    l1 = pymunk.Segment(body, (-150,0), (255,0), 5)
-    l2 = pymunk.Segment(body, (-150,0), (-150,50), 5)
-    space.add(l1, l2)
-    return l1, l2
-
-def add_L(space):
-    """Add a inverted L shape with two joints"""
-    rotation_center_body = pymunk.Body(body_type = pymunk.Body.STATIC)
-    rotation_center_body.position = (300,300)
-    
-    rotation_limit_body = pymunk.Body(body_type = pymunk.Body.STATIC)
-    rotation_limit_body.position = (200,300)
-    
-    body = pymunk.Body(10, 10000)
-    body.position = (300,300)
-    l1 = pymunk.Segment(body, (-150, 0), (255.0, 0.0), 5.0)
-    l2 = pymunk.Segment(body, (-150.0, 0), (-150.0, 50.0), 5.0)
-    
-    rotation_center_joint = pymunk.PinJoint(body, rotation_center_body, (0,0), (0,0))
-    joint_limit = 25
-    rotation_limit_joint = pymunk.SlideJoint(body, rotation_limit_body, (-100,0), (0,0), 0, joint_limit)
-    
-    space.add(l1, l2, body, rotation_center_joint, rotation_limit_joint)
-    return l1,l2
+@window.event
+def on_draw():
+    window.clear()
+    fps_display.draw()
+    config.batch.draw()
+    pyglet.gl.glLineWidth(10)
+    pyglet.graphics.draw(4, pyglet.gl.GL_LINES,
+                         ('v2i', (
+                             10, 10,
+                             10, config.height-10,
+                             config.width-10, config.height-10,
+                             config.width-10, 10
+                         )),
+                         ('c3B', (
+                             0, 0, 255,
+                             0, 255, 0,
+                             255, 0, 0,
+                             0, 0, 255
+                         ))
+    )
 
 if __name__ == '__main__':
-    sys.exit(main())
+    pyglet.clock.schedule_interval(update, config.spf)
+    pyglet.app.run()
