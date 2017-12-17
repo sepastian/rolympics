@@ -22,26 +22,98 @@ def update(dt):
 
 fps_display = pyglet.clock.ClockDisplay()
 
+color = (200,200,200)
+config.batch.add(
+    4, pyglet.gl.GL_LINE_LOOP, None,
+    ('v2i', (
+        20, 20,
+        20, config.height-20,
+        config.width-20, config.height-20,
+        config.width-20, 20
+    )),
+    ('c3B', (
+        *color,
+        *color,
+        *color,
+        *color
+        # 0, 0, 255,
+        # 0, 255, 0,
+        # 255, 0, 0,
+        # 255, 0, 0
+    ))
+)
+config.batch.add(
+    2, pyglet.gl.GL_LINES, None,
+    ('v2i', (
+        config.width//2, 20,
+        config.width//2, config.height-20
+    )),
+    ('c3B', (
+        *color,
+        *color
+    ))
+)
+# Left-hand goal.
+config.batch.add(
+    6, pyglet.gl.GL_LINES, None,
+    ('v2i', (
+        20, config.height//2-config.height//8,
+        10, config.height//2-config.height//8,
+        10, config.height//2-config.height//8,
+        10, config.height//2+config.height//8,
+        10, config.height//2+config.height//8,
+        20, config.height//2+config.height//8
+    )),
+    ('c3B', (
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0
+    ))
+)
+# Right-hand goal.
+config.batch.add(
+    6, pyglet.gl.GL_LINES, None,
+    ('v2i', (
+        config.width-20, config.height//2-config.height//8,
+        config.width-10, config.height//2-config.height//8,
+        config.width-10, config.height//2-config.height//8,
+        config.width-10, config.height//2+config.height//8,
+        config.width-10, config.height//2+config.height//8,
+        config.width-20, config.height//2+config.height//8
+    )),
+    ('c3B', (
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0,
+        0,0,0
+    ))
+)
+
 @window.event
 def on_draw():
     window.clear()
-    fps_display.draw()
-    config.batch.draw()
     pyglet.gl.glLineWidth(10)
-    pyglet.graphics.draw(4, pyglet.gl.GL_LINES,
-                         ('v2i', (
-                             10, 10,
-                             10, config.height-10,
-                             config.width-10, config.height-10,
-                             config.width-10, 10
-                         )),
-                         ('c3B', (
-                             0, 0, 255,
-                             0, 255, 0,
-                             255, 0, 0,
-                             0, 0, 255
-                         ))
-    )
+    # pyglet.graphics.draw(4, pyglet.gl.GL_LINE_LOOP,
+    #                      ('v2i', (
+    #                          20, 20,
+    #                          20, config.height-20,
+    #                          config.width-20, config.height-20,
+    #                          config.width-20, 20
+    #                      )),
+    #                      ('c3B', (
+    #                          0, 0, 255,
+    #                          0, 255, 0,
+    #                          255, 0, 0,
+    #                          255, 0, 0
+    #                      ))
+    # )
+    config.batch.draw()
+    fps_display.draw()
 
 if __name__ == '__main__':
     pyglet.clock.schedule_interval(update, config.spf)
