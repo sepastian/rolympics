@@ -17,18 +17,20 @@ class PhysicalObject(pyglet.sprite.Sprite):
         return d
 
     def collides_with(self, other):
-        #dx, dy = other.x - self.x, other.y - self.y
+        dx, dy = other.x - self.x, other.y - self.y
         r = self.radius + other.radius
-        return self.distance_to(other) < r**2
-        #return (self.x - other.x)**2 + (self.y - other.y)**2 < r**2
-        d2 = dx**2 + dy**2 # distance squared
-        if d2 > r**2:
-            return false
-        d = math.sqrt(d2) # distance
-        if d != 0:
-            return true, r-d, t/d
-            penetration = r - d
-
+        d = dx**2 + dy**2
+        if d > r**2:
+            # No collision.
+            return False, 0, 0
+        # Compute overlap o;
+        # compute correction vector (cx,cy)
+        # as distance between objects,
+        # scaled to half the overlap.
+        d = math.sqrt(d)
+        o = (r - d)/2
+        return True, dx/d*o, dy/d*o
+    
     def resolve_collisions(self):
         for other in res.game_objects:
             pass

@@ -25,7 +25,8 @@ logo = pyglet.sprite.Sprite(
     batch=config.batch, x=config.width//2, y=config.height//2)
 
 # Playing field.
-x0, x1, y0, y1 = 50, config.width-50, 20, config.height-20
+#x0, x1, y0, y1 = 50, config.width-50, 20, config.height-20
+x0, x1, y0, y1 = config.fx0, config.fx1, config.fy0, config.fy1
 config.batch.add(
     4, pyglet.gl.GL_LINE_LOOP, None,
     ('v2i', (
@@ -95,11 +96,11 @@ y = config.height//2
 #robot = Robot(robot_animation, batch=config.batch, x=x, y=y)
 #robot.rotation = random.randint(0,360)
 game_objects = []
-for i in range(5):
+for i in range(50):
     robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+random.randint(-50,50), y=config.height//2+random.randint(-50,50))
     robot.rotation = 0
-    robot.vx = random.randint(-50,50)
-    robot.vy = random.randint(-50,50)
+    robot.vx = random.randint(-100,100)
+    robot.vy = random.randint(-100,100)
     game_objects.append(robot)
 
 # #robot = Robot(robot_animation, batch=config.batch, x=config.width//2-100, y=config.height//2)
