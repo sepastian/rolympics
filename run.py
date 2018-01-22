@@ -15,103 +15,38 @@ pyglet.gl.glClearColor(1,1,1,1)
 def update(dt):
     for obj in res.game_objects:
         obj.update(dt)
-
-    #func = walker.step(res.robot.position, ((0,0),(config.width,config.height)))
-    #func[0](res.robot, *func[1:])
-    #action(res.robot, *args)
+    # detect collisions
+    collisions = []
+    i = 0
+    while i < len(res.game_objects):
+        obj1 = res.game_objects[i]
+        j = i + 1
+        while j < len(res.game_objects):
+            obj2 = res.game_objects[j]
+            d = obj1.distance_from(obj2)
+            r = obj1.radius + obj2.radius
+            overlap = r - d
+            if overlap > 0:
+                o = overlap/2
+                dx, dy = (obj2.x - obj1.x)/d*o, (obj2.y - obj1.y)/d*o
+                obj1.x -= dx
+                obj1.y -= dy
+                obj2.x += dx
+                obj2.y += dy
+            #if obj1.collides_with(obj2):
+            #    collisions.append((obj1, obj2))
+            j += 1
+        i += 1
+    # resolve collisions
+    for collision in collisions:
+        obj.resolve_collisions
 
 fps_display = pyglet.clock.ClockDisplay()
-
-color = (200,200,200)
-config.batch.add(
-    4, pyglet.gl.GL_LINE_LOOP, None,
-    ('v2i', (
-        20, 20,
-        20, config.height-20,
-        config.width-20, config.height-20,
-        config.width-20, 20
-    )),
-    ('c3B', (
-        *color,
-        *color,
-        *color,
-        *color
-        # 0, 0, 255,
-        # 0, 255, 0,
-        # 255, 0, 0,
-        # 255, 0, 0
-    ))
-)
-config.batch.add(
-    2, pyglet.gl.GL_LINES, None,
-    ('v2i', (
-        config.width//2, 20,
-        config.width//2, config.height-20
-    )),
-    ('c3B', (
-        *color,
-        *color
-    ))
-)
-# Left-hand goal.
-config.batch.add(
-    6, pyglet.gl.GL_LINES, None,
-    ('v2i', (
-        20, config.height//2-config.height//8,
-        10, config.height//2-config.height//8,
-        10, config.height//2-config.height//8,
-        10, config.height//2+config.height//8,
-        10, config.height//2+config.height//8,
-        20, config.height//2+config.height//8
-    )),
-    ('c3B', (
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0
-    ))
-)
-# Right-hand goal.
-config.batch.add(
-    6, pyglet.gl.GL_LINES, None,
-    ('v2i', (
-        config.width-20, config.height//2-config.height//8,
-        config.width-10, config.height//2-config.height//8,
-        config.width-10, config.height//2-config.height//8,
-        config.width-10, config.height//2+config.height//8,
-        config.width-10, config.height//2+config.height//8,
-        config.width-20, config.height//2+config.height//8
-    )),
-    ('c3B', (
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0,
-        0,0,0
-    ))
-)
 
 @window.event
 def on_draw():
     window.clear()
-    pyglet.gl.glLineWidth(10)
-    # pyglet.graphics.draw(4, pyglet.gl.GL_LINE_LOOP,
-    #                      ('v2i', (
-    #                          20, 20,
-    #                          20, config.height-20,
-    #                          config.width-20, config.height-20,
-    #                          config.width-20, 20
-    #                      )),
-    #                      ('c3B', (
-    #                          0, 0, 255,
-    #                          0, 255, 0,
-    #                          255, 0, 0,
-    #                          255, 0, 0
-    #                      ))
-    # )
+    pyglet.gl.glLineWidth(5)
     config.batch.draw()
     fps_display.draw()
 
