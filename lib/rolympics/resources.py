@@ -5,6 +5,8 @@ import pyglet
 from rolympics import config
 from rolympics.robot import Robot
 from rolympics.physical_object import PhysicalObject
+from rolympics.ball import Ball
+from rolympics.robot import Robot
 
 pyglet.resource.path = ['./resources']
 pyglet.resource.reindex()
@@ -96,12 +98,17 @@ y = config.height//2
 #robot = Robot(robot_animation, batch=config.batch, x=x, y=y)
 #robot.rotation = random.randint(0,360)
 game_objects = []
-for i in range(50):
-    robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+random.randint(-50,50), y=config.height//2+random.randint(-50,50))
-    robot.rotation = 0
-    robot.vx = random.randint(-100,100)
-    robot.vy = random.randint(-100,100)
-    game_objects.append(robot)
+# for i in range(50):
+#     robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+random.randint(-50,50), y=config.height//2+random.randint(-50,50))
+#     robot.rotation = 0
+#     robot.vx = random.randint(-100,100)
+#     robot.vy = random.randint(-100,100)
+#     game_objects.append(robot)
+
+robot = Robot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
+robot.vx = 50
+robot.vy = 0
+game_objects.append(robot)
 
 # #robot = Robot(robot_animation, batch=config.batch, x=config.width//2-100, y=config.height//2)
 # robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
@@ -128,7 +135,8 @@ for i in range(50):
 #robot.walk_to(100,100)
 
 # Ball.
-ball = PhysicalObject(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2)
-ball.vx = 20
-ball.vy = 20
+#ball = PhysicalObject(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2)
+ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2-20)
+ball.vx = 0
+ball.vy = 0
 game_objects.append(ball)

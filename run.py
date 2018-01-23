@@ -26,11 +26,13 @@ def update(dt):
             # Compute collision manifold between obj1 and obj2.
             collision, cx, cy = obj1.collides_with(obj2)
             if collision:
+                obj1.handle_collision(-cx, -cy)
+                obj2.handle_collision(cx, cy)
                 # Correct positions, if collision occured.
-                obj1.x -= cx
-                obj1.y -= cy
-                obj2.x += cx
-                obj2.y += cy
+                # obj1.x -= cx
+                # obj1.y -= cy
+                # obj2.x += cx
+                # obj2.y += cy
             j += 1
         i += 1
         # Make objects bounce off borders
@@ -42,6 +44,9 @@ def update(dt):
             obj1.vy *= -1
         obj1.x = min(max(obj1.x, minx), maxx)
         obj1.y = min(max(obj1.y, miny), maxy)
+    for obj in res.game_objects:
+        obj.adjust(res.ball.x, res.ball.y)
+        
 fps_display = pyglet.clock.ClockDisplay()
 
 @window.event

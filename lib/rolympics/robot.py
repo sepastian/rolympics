@@ -1,16 +1,18 @@
-import math
-import random
 import pyglet
+import random
+import math
+from rolympics import config
+from rolympics import resources as res
 from rolympics.physical_object import PhysicalObject
 
 class Robot(PhysicalObject):
+    
+    def adjust(self, bx, by):
+        dx = config.fx1 - bx + 100
+        dy = config.height//2 - by + 100
+        tx = config.fx1 - dx
+        ty = config.height//2 - dy
+        print(tx, ty)
+        self.vx = tx - self.x
+        self.vy = ty - self.y
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.w = self.image.get_max_width()
-        self.h = self.image.get_max_height()
-
-    def walk_to(self, x, y):
-        self.vx = (x - self.x) * 0.5
-        self.vy = (y - self.y) * 0.5
-        self.rotation = math.degrees(math.atan(self.vy/self.vx))

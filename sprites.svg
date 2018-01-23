@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="sprites.svg"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+   inkscape:version="0.91 r13725">
   <defs
      id="defs2">
     <linearGradient
@@ -48,17 +48,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.81577632"
-     inkscape:cx="-1418.8931"
-     inkscape:cy="985.28276"
+     inkscape:zoom="0.40788816"
+     inkscape:cx="-1602.169"
+     inkscape:cy="1064.4312"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1362"
-     inkscape:window-height="746"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1136"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0" />
   <metadata
@@ -69,7 +69,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1248,13 +1248,13 @@
          y="184.3007" />
     </g>
     <circle
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:4.92663622;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:0.75;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.92663622;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path991"
-       cx="-331.6893"
-       cy="64.524712"
-       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/ball.png"
-       inkscape:export-xdpi="6.3499999"
-       inkscape:export-ydpi="6.3499999"
+       cx="-587.00439"
+       cy="139.94299"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/robot.png"
+       inkscape:export-xdpi="12.7"
+       inkscape:export-ydpi="12.7"
        r="47.536682" />
     <path
        sodipodi:type="star"
@@ -2155,5 +2155,41 @@
          x="-189.62384"
          y="184.3007" />
     </g>
+    <g
+       id="g4858"
+       transform="translate(201.08201,202.73661)"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/robot.png"
+       inkscape:export-xdpi="12.7"
+       inkscape:export-ydpi="12.7"
+       style="stroke:#ffffff;stroke-width:5.64444448;stroke-miterlimit:4;stroke-dasharray:none">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4854"
+         d="m -798.46505,-73.172277 20.7573,20.757325"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:5.64444448;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:5.64444448;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m -777.70775,-73.172277 -20.7573,20.757325"
+         id="path4856"
+         inkscape:connector-curvature="0" />
+    </g>
+    <circle
+       r="47.536682"
+       inkscape:export-ydpi="6.3899999"
+       inkscape:export-xdpi="6.3899999"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/ball.png"
+       cy="11.939495"
+       cx="-771.74457"
+       id="circle4862"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.23333336;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.23333336;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle4870"
+       cx="-771.74457"
+       cy="11.939495"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/ball.png"
+       inkscape:export-xdpi="6.3899999"
+       inkscape:export-ydpi="6.3899999"
+       r="23.197235" />
   </g>
 </svg>
