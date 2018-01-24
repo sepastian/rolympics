@@ -83,20 +83,21 @@ config.batch.add(
 )
 
 # Robot.
-robot_animation = pyglet.image.Animation.from_image_sequence(
-    [
-        center_image(pyglet.resource.image('r_e_b_0.png')),
-        center_image(pyglet.resource.image('r_e_b_1.png')),
-        center_image(pyglet.resource.image('r_e_b_2.png')),
-        center_image(pyglet.resource.image('r_e_b_3.png'))
-    ],
-    0.5/4.0,
-    True)
-x = config.width//2
-y = config.height//2
+# robot_animation = pyglet.image.Animation.from_image_sequence(
+#     [
+#         center_image(pyglet.resource.image('r_e_b_0.png')),
+#         center_image(pyglet.resource.image('r_e_b_1.png')),
+#         center_image(pyglet.resource.image('r_e_b_2.png')),
+#         center_image(pyglet.resource.image('r_e_b_3.png'))
+#     ],
+#     0.5/4.0,
+#     True)
+# x = config.width//2
+# y = config.height//2
 #x, y = 0, 0
 #robot = Robot(robot_animation, batch=config.batch, x=x, y=y)
 #robot.rotation = random.randint(0,360)
+
 game_objects = []
 # for i in range(50):
 #     robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+random.randint(-50,50), y=config.height//2+random.randint(-50,50))
@@ -106,7 +107,7 @@ game_objects = []
 #     game_objects.append(robot)
 
 robot = Robot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
-robot.vx = 50
+robot.vx = 0
 robot.vy = 0
 game_objects.append(robot)
 

@@ -10,7 +10,8 @@ class PhysicalObject(pyglet.sprite.Sprite):
         super().__init__(*args, **kwargs)
         self.vx, self.vy = 0.0, 0.0
         self.radius = self.image.width//2
-
+        self.moving = False
+        
     def collides_with(self, other):
         dx, dy = other.x - self.x, other.y - self.y
         r = self.radius + other.radius
