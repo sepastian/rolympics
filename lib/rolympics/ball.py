@@ -15,7 +15,7 @@ class Ball(PhysicalObject):
             self.vx = 0
         if abs(self.vy) < 2:
             self.vy = 0
-        
+
     def handle_collision(self, cx, cy):
         super().handle_collision(cx, cy)
         d = math.sqrt(cx**2 + cy**2)

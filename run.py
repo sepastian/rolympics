@@ -28,11 +28,6 @@ def update(dt):
             if collision:
                 obj1.handle_collision(-cx, -cy)
                 obj2.handle_collision(cx, cy)
-                # Correct positions, if collision occured.
-                # obj1.x -= cx
-                # obj1.y -= cy
-                # obj2.x += cx
-                # obj2.y += cy
             j += 1
         i += 1
         # Make objects bounce off borders
@@ -46,7 +41,7 @@ def update(dt):
         obj1.y = min(max(obj1.y, miny), maxy)
     for obj in res.game_objects:
         obj.adjust(res.ball.x, res.ball.y)
-        
+
 fps_display = pyglet.clock.ClockDisplay()
 
 @window.event
@@ -55,8 +50,23 @@ def on_draw():
     pyglet.gl.glLineWidth(5)
     config.batch.draw()
     fps_display.draw()
-    #pyglet.image.get_buffer_manager().get_color_buffer().save(file=p.stdin)
-    
+    for robot in res.robots:
+        if not robot.moving:
+            continue
+        tx, ty = robot.tx, robot.ty
+        pyglet.graphics.draw(
+            4, pyglet.gl.GL_LINES,
+            ('v2i', (
+                tx+5, ty+5,
+                tx-5, ty-5,
+                tx+5, ty-5,
+                tx-5, ty+5
+            )),
+            ('c3B', (
+                [ v for v in (200,200,200) for i in range(4) ]
+            )))
+        #pyglet.image.get_buffer_manager().get_color_buffer().save(file=p.stdin)
+
 if __name__ == '__main__':
     pyglet.clock.schedule_interval(update, config.spf)
     #from PIL import Image

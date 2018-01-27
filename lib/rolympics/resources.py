@@ -1,9 +1,9 @@
 import math, random
 import pyglet
-#import pymunk
 
 from rolympics import config
 from rolympics.robot import Robot
+from rolympics.my_robot import MyRobot
 from rolympics.physical_object import PhysicalObject
 from rolympics.ball import Ball
 from rolympics.robot import Robot
@@ -99,41 +99,12 @@ config.batch.add(
 #robot.rotation = random.randint(0,360)
 
 game_objects = []
-# for i in range(50):
-#     robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+random.randint(-50,50), y=config.height//2+random.randint(-50,50))
-#     robot.rotation = 0
-#     robot.vx = random.randint(-100,100)
-#     robot.vy = random.randint(-100,100)
-#     game_objects.append(robot)
+robots = []
 
-robot = Robot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
-robot.vx = 0
-robot.vy = 0
-game_objects.append(robot)
-
-# #robot = Robot(robot_animation, batch=config.batch, x=config.width//2-100, y=config.height//2)
-# robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
-# robot.rotation = 90
-# robot.vx = 40
-# robot.vy = 2
-# game_objects.append(robot)
-# #robot = Robot(robot_animation, batch=config.batch, x=config.width//2+100, y=config.height//2)
-# robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+100, y=config.height//2)
-# robot.rotation = -90
-# robot.vx = -30
-# robot.vy = -5
-# game_objects.append(robot)
-
-# robot = PhysicalObject(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2, y=config.height//2-50)
-# robot.rotation = -90
-# robot.vx = -4
-# robot.vy = 30
-# game_objects.append(robot)
-
-#radians = -math.radians(robot.rotation-90)
-#robot.vx = math.cos(radians) * 60
-#robot.vy = math.sin(radians) * 60
-#robot.walk_to(100,100)
+for i in range(5):
+    robot = MyRobot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
+    game_objects.append(robot)
+    robots.append(robot)
 
 # Ball.
 #ball = PhysicalObject(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2)

@@ -10,8 +10,7 @@ class PhysicalObject(pyglet.sprite.Sprite):
         super().__init__(*args, **kwargs)
         self.vx, self.vy = 0.0, 0.0
         self.radius = self.image.width//2
-        self.moving = False
-        
+
     def collides_with(self, other):
         dx, dy = other.x - self.x, other.y - self.y
         r = self.radius + other.radius
@@ -19,13 +18,16 @@ class PhysicalObject(pyglet.sprite.Sprite):
         if d > r**2:
             # No collision.
             return False, 0, 0
-        # Compute overlap o;
-        # compute correction vector (cx,cy)
-        # as distance between objects,
-        # scaled to half the overlap.
+        # Compute:
+        #   - overlap o;
+        #   - correction vector (=dist scaled to half the overlap)
+        # Handle distance of zero (complete overlap).
         d = math.sqrt(d)
         o = (r - d)/2
-        return True, dx/d*o, dy/d*o
+        cx, cy = o, o
+        if d > 0:
+            cx, cy = dx/d*o, dy/d*o
+        return True, cx, cy
 
     def handle_collision(self, cx, cy):
         self.x += cx
