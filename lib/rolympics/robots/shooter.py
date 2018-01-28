@@ -4,11 +4,11 @@ from rolympics import config
 from rolympics import resources as res
 from rolympics.robot import Robot
 
-class RandomWalker(Robot):
+class Shooter(Robot):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.name('random!')
+        self.name('shooter')
 
     def adjust(self, bx, by):
         """

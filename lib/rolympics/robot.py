@@ -17,6 +17,7 @@ class Robot(PhysicalObject):
         img.anchor_x = img.width//2
         img.anchor_y = img.height//2
         self.target = pyglet.sprite.Sprite(img, batch=config.batch, x=self.tx, y=self.ty)
+        self.team = '?'
 
     def update(self, dt):
         """

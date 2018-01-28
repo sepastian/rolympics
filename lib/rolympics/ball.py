@@ -11,9 +11,9 @@ class Ball(PhysicalObject):
         super().update(dt)
         self.vx *= 1 - 1.0 * dt
         self.vy *= 1 - 1.0 * dt
-        if abs(self.vx) < 2:
+        if abs(self.vx) < 0.1:
             self.vx = 0
-        if abs(self.vy) < 2:
+        if abs(self.vy) < 0.1:
             self.vy = 0
         # Make sure ball will never rest too close to border.
         if self.x <= config.fx0+self.radius or self.x >= config.fx1-self.radius:
@@ -32,3 +32,14 @@ class Ball(PhysicalObject):
             d = 1.0
         self.vx = cx/d * 100
         self.vy = cy/d * 100
+
+    def collides_with(self, other):
+        """
+        Remember who touched the ball last.
+        """
+        result = super().collides_with(other)
+        print(result)
+        if result[0]:
+            self.last_touch = other
+            print(self.last_touch)
+        return result

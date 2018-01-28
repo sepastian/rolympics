@@ -43,14 +43,14 @@ def update(dt):
     for obj in res.game_objects:
         obj.adjust(res.ball.x, res.ball.y)
 
-fps_display = pyglet.clock.ClockDisplay()
+#fps_display = pyglet.clock.ClockDisplay()
 
 @window.event
 def on_draw():
     window.clear()
     pyglet.gl.glLineWidth(5)
     config.batch.draw()
-    fps_display.draw()
+    #fps_display.draw()
     #pyglet.image.get_buffer_manager().get_color_buffer().save(file=p.stdin)
 
 if __name__ == '__main__':

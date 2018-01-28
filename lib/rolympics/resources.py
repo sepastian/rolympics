@@ -116,13 +116,33 @@ game_objects = []
 # r1.tx = r2.x
 # r2.tx = r1.x
 
-img = center_image(pyglet.resource.image('robot.png'))
+teams = [
+    {
+        'name': 0,
+        'img': center_image(pyglet.resource.image('robot_a.png'))
+    },
+    {
+        'name': 1,
+        'img': center_image(pyglet.resource.image('robot_b.png'))
+    }
+]
+i = 0
 for robot_class in Robot.__subclasses__():
-    robot = robot_class(img, batch=config.batch, x=config.width//2-100, y=config.height//2)
+    t = teams[i%2]
+    robot = robot_class(t['img'], batch=config.batch, x=config.width//2-100, y=config.height//2)
+    robot.team = t['name']
     game_objects.append(robot)
+    i += 1
 
 # Ball.
 ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2-200, y=0)
 ball.vx = 0
 ball.vy = 0
 game_objects.append(ball)
+
+# Score.
+score = [0,0]
+score_labels = [
+    pyglet.text.Label('0',x=config.fx0+40,y=config.fy0+20,anchor_x='center',font_size=60,batch=config.batch,color=(0,0,0,100)),
+    pyglet.text.Label('0',x=config.fx1-40,y=config.fy0+20,anchor_x='center',font_size=60,batch=config.batch,color=(0,0,0,100))
+]
