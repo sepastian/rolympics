@@ -13,6 +13,10 @@ class Robot(PhysicalObject):
         self.ty = self.y
         self.moving = False
         self.velocity = 150
+        img = pyglet.resource.image('cross.png')
+        img.anchor_x = img.width//2
+        img.anchor_y = img.height//2
+        self.target = pyglet.sprite.Sprite(img, batch=config.batch, x=self.tx, y=self.ty)
 
     def update(self, dt):
         """
@@ -26,7 +30,6 @@ class Robot(PhysicalObject):
         if abs(dx) < 1 and abs(dy) < 1:
             # Robot has reached its target, pause.
             # (Without this, robot will jump back and forth around target!)
-            print('!', self.x, self.y, self.tx, self.ty, dx, dy)
             self.moving = False
             return
         # Normalize target vector to unit length.
@@ -39,9 +42,11 @@ class Robot(PhysicalObject):
             mx = dx
         if abs(my) > abs(dy):
             my = dy
-        print(self.x, self.y, self.tx, self.ty, mx, my)
         self.x += mx
         self.y += my
+        # Update position of target cross.
+        self.target.x = self.tx
+        self.target.y = self.ty
 
     def adjust(self, bx, by):
         """

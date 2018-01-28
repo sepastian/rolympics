@@ -5,7 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 from rolympics import resources as res
 from rolympics import config
 from rolympics.physical_object import PhysicalObject
-from rolympics.robots import walker
 
 gl_config = pyglet.gl.Config(sample_buffers=1, samples=2, double_buffer=True)
 window = pyglet.window.Window(config.width, config.height, config=gl_config, vsync = False)
@@ -29,7 +28,9 @@ def update(dt):
                 obj1.handle_collision(-cx, -cy)
                 obj2.handle_collision(cx, cy)
             j += 1
+            obj2.label.x, obj2.label.y = obj2.x, obj2.y-30
         i += 1
+        obj1.label.x, obj1.label.y = obj1.x, obj1.y-30
         # Make objects bounce off borders
         r = obj1.radius
         minx, maxx, miny, maxy = config.fx0+r, config.fx1-r, config.fy0+r, config.fy1-r
@@ -50,22 +51,7 @@ def on_draw():
     pyglet.gl.glLineWidth(5)
     config.batch.draw()
     fps_display.draw()
-    for robot in res.robots:
-        if not robot.moving:
-            continue
-        tx, ty = robot.tx, robot.ty
-        pyglet.graphics.draw(
-            4, pyglet.gl.GL_LINES,
-            ('v2i', (
-                tx+5, ty+5,
-                tx-5, ty-5,
-                tx+5, ty-5,
-                tx-5, ty+5
-            )),
-            ('c3B', (
-                [ v for v in (200,200,200) for i in range(4) ]
-            )))
-        #pyglet.image.get_buffer_manager().get_color_buffer().save(file=p.stdin)
+    #pyglet.image.get_buffer_manager().get_color_buffer().save(file=p.stdin)
 
 if __name__ == '__main__':
     pyglet.clock.schedule_interval(update, config.spf)

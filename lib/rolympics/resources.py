@@ -1,11 +1,13 @@
 import math, random
 import pyglet
+import sys
 
 from rolympics import config
-from rolympics.robot import Robot
-from rolympics.my_robot import MyRobot
 from rolympics.physical_object import PhysicalObject
 from rolympics.ball import Ball
+
+# Load all robots in lib/rolympics/robots/*.py
+import rolympics.robots
 from rolympics.robot import Robot
 
 pyglet.resource.path = ['./resources']
@@ -99,16 +101,28 @@ config.batch.add(
 #robot.rotation = random.randint(0,360)
 
 game_objects = []
-robots = []
 
-for i in range(5):
-    robot = MyRobot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
+# Test randomness in collisions.
+# r1 = Robot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2-100, y=config.height//2)
+# r1.vx = 100
+# r1.moving = True
+# r2 = Robot(center_image(pyglet.resource.image('robot.png')), batch=config.batch, x=config.width//2+100, y=config.height//2)
+# r2.vx = -100
+# r2.moving = True
+# game_objects.append(r1)
+# game_objects.append(r2)
+# robots.append(r1)
+# robots.append(r2)
+# r1.tx = r2.x
+# r2.tx = r1.x
+
+img = center_image(pyglet.resource.image('robot.png'))
+for robot_class in Robot.__subclasses__():
+    robot = robot_class(img, batch=config.batch, x=config.width//2-100, y=config.height//2)
     game_objects.append(robot)
-    robots.append(robot)
 
 # Ball.
-#ball = PhysicalObject(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2)
-ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2-20)
+ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2-200, y=0)
 ball.vx = 0
 ball.vy = 0
 game_objects.append(ball)
