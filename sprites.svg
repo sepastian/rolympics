@@ -16,9 +16,17 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="sprites.svg"
-   inkscape:version="0.91 r13725">
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
   <defs
      id="defs2">
+    <inkscape:path-effect
+       is_visible="true"
+       id="path-effect1157"
+       effect="spiro" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect1153"
+       is_visible="true" />
     <linearGradient
        id="linearGradient2615"
        osb:paint="solid">
@@ -48,17 +56,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.40788816"
-     inkscape:cx="-1602.169"
-     inkscape:cy="1064.4312"
+     inkscape:zoom="0.28842048"
+     inkscape:cx="-983.93603"
+     inkscape:cy="1423.0606"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1136"
-     inkscape:window-x="1920"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1916"
+     inkscape:window-height="1058"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0" />
   <metadata
@@ -69,7 +77,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2191,5 +2199,50 @@
        inkscape:export-xdpi="6.3899999"
        inkscape:export-ydpi="6.3899999"
        r="23.197235" />
+    <g
+       style="stroke:#000000;stroke-width:5.64444447;stroke-miterlimit:4;stroke-dasharray:none;fill:none"
+       inkscape:export-ydpi="5.1300001"
+       inkscape:export-xdpi="5.1300001"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/cross.png"
+       transform="translate(189.40602,82.084665)"
+       id="g1137">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.64444447;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -798.46505,-73.172277 20.7573,20.757325"
+         id="path1133"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1135"
+         d="m -777.70775,-73.172277 -20.7573,20.757325"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5.64444447;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <circle
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.23333359;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1139"
+       cx="-646.55194"
+       cy="-143.74043"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/ball.png"
+       inkscape:export-xdpi="6.3899999"
+       inkscape:export-ydpi="6.3899999"
+       r="47.536682" />
+    <circle
+       r="47.536682"
+       inkscape:export-ydpi="12.7"
+       inkscape:export-xdpi="12.7"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/robot_b.png"
+       cy="157.56036"
+       cx="-744.92505"
+       id="circle1149"
+       style="opacity:0.75;fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.92663622;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       style="opacity:0.75;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.92663622;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1206"
+       cx="-658.69391"
+       cy="241.03947"
+       inkscape:export-filename="/home/sebastian/Code/rolympics/resources/robot_a.png"
+       inkscape:export-xdpi="12.7"
+       inkscape:export-ydpi="12.7"
+       r="47.536682" />
   </g>
 </svg>
