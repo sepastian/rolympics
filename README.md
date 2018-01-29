@@ -66,3 +66,17 @@ To get into the project directory `rolympics-master`, you need to type:
     C:\Users\S\Desktop\rolympics-master>  python run.py
     
 You are now inside the project directory, type `python run.py` to start!
+
+## Creating a Robot
+
+All robots can be found in `lib/rolympics/robots/`. When the program starts, each robot will be assigned to either team A or team B and placed at a random position.
+
+To create your own robot, copy an existing robot and rename the file. Make sure to place the new file in `lib/rolympics/robots/`. Make sure the files ends with `.py`.
+
+Assuming you created the file `lib/rolympics/robots/my_robot.py`, edit that file as follows:
+
+    :
+    class MyRobot(Robot):  # The name after class must be the same as the file name, in camel-case.
+        def __init__(self,*args,**kwargs):
+            self.name('My Robot') # Set the name/label of your new robot to a name you choose!
+    :
