@@ -4,18 +4,20 @@ from rolympics import config
 from rolympics import resources as res
 from rolympics.robot import Robot
 
-class Shooter(Robot):
+class StraightEdge(Robot):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.name('r2')
-
+        self.name('straight')
+        self.vx = 105
+        self.vy = 100
+        
+    def update(self, dt):
+        self.x = int(self.x + self.vx * dt)
+        self.y = int(self.y + self.vy * dt)
+        
     def adjust(self, bx, by):
         """
         Adjust target coordinates.
         """
-        if not self.moving:
-            self.tx = randint(config.fx0+self.radius+10, config.fx1-self.radius-10)
-            self.ty = randint(config.fy0+self.radius+10, config.fy1-self.radius-10)
-            self.moving = True
-            
+        pass

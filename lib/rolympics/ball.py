@@ -8,14 +8,19 @@ from rolympics.physical_object import PhysicalObject
 class Ball(PhysicalObject):
 
     def update(self, dt):
+        """
+        """
         super().update(dt)
+        # Did the ball pass the goal line?
+        
+        # Decrease ball's velocity.
         self.vx *= 1 - 1.0 * dt
         self.vy *= 1 - 1.0 * dt
         if abs(self.vx) < 0.1:
             self.vx = 0
         if abs(self.vy) < 0.1:
             self.vy = 0
-        # Make sure ball will never rest too close to border.
+        # Bounce the ball off any border to prevent dead locks.
         if self.x <= config.fx0+self.radius or self.x >= config.fx1-self.radius:
             self.vx = (self.x - config.width//2) * 0.5
         if self.y <= config.fy0+self.radius or self.y >= config.fy1-self.radius:
@@ -33,13 +38,19 @@ class Ball(PhysicalObject):
         self.vx = cx/d * 100
         self.vy = cy/d * 100
 
-    def collides_with(self, other):
+    def bounce_off_borders(self):
         """
-        Remember who touched the ball last.
+        Bounce off borders as other objects;
+        do not bounce, when passing the goal line.
         """
-        result = super().collides_with(other)
-        print(result)
-        if result[0]:
-            self.last_touch = other
-            print(self.last_touch)
-        return result
+        r = self.radius
+        minx, maxx, miny, maxy = config.fx0+r, config.fx1-r, config.fy0+r, config.fy1-r
+        if self.x <= minx and config.gly0 < self.y < config.gly1:
+            res.score[0] += 1
+            res.score_labels[0].text= str(res.score[0])
+            res.scored = True
+        elif self.x >= maxx and config.gry0 < self.y < config.gry1:
+            res.score[1] += 1
+            res.score_labels[1].text = str(res.score[1])
+            res.scored = True
+        super().bounce_off_borders()

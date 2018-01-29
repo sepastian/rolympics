@@ -1,4 +1,4 @@
-import math, random
+import math, random, time
 import pyglet
 import sys
 
@@ -119,23 +119,28 @@ game_objects = []
 teams = [
     {
         'name': 0,
+        'goal_line': (config.grx0, config.gry0, config.grx1, config.grx1),
         'img': center_image(pyglet.resource.image('robot_a.png'))
     },
     {
         'name': 1,
+        'goal_line': (config.grx0, config.gry0, config.grx1, config.grx1),
         'img': center_image(pyglet.resource.image('robot_b.png'))
     }
 ]
 i = 0
 for robot_class in Robot.__subclasses__():
     t = teams[i%2]
-    robot = robot_class(t['img'], batch=config.batch, x=config.width//2-100, y=config.height//2)
+    x = config.width//4 * random.random() + i%2*(config.width//4)*3
+    y = config.height//2-config.height//4 + random.random()*config.height//2
+    robot = robot_class(t['img'], batch=config.batch, x=x, y=y)
     robot.team = t['name']
+    robot.goal_line = t['goal_line']
     game_objects.append(robot)
     i += 1
 
 # Ball.
-ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2-200, y=0)
+ball = Ball(center_image(pyglet.resource.image('ball.png')), batch=config.batch, x=config.width//2, y=config.height//2)
 ball.vx = 0
 ball.vy = 0
 game_objects.append(ball)
@@ -146,3 +151,7 @@ score_labels = [
     pyglet.text.Label('0',x=config.fx0+40,y=config.fy0+20,anchor_x='center',font_size=60,batch=config.batch,color=(0,0,0,100)),
     pyglet.text.Label('0',x=config.fx1-40,y=config.fy0+20,anchor_x='center',font_size=60,batch=config.batch,color=(0,0,0,100))
 ]
+scored = False
+
+reset_interval = 20
+reset_at = int(time.time()) + reset_interval

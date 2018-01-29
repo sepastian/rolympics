@@ -1,4 +1,5 @@
 import sys, os, random, math
+import time
 import pyglet
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
@@ -12,6 +13,13 @@ window = pyglet.window.Window(config.width, config.height, config=gl_config, vsy
 pyglet.gl.glClearColor(1,1,1,1)
 
 def update(dt):
+    if time.time() > res.reset_at or res.scored:
+        res.ball.x = config.width//2
+        res.ball.y = config.height//2
+        res.ball.vx = 0
+        res.ball.vy = 0
+        res.reset_at = int(time.time()) + res.reset_interval
+        res.scored = False
     # Move all objects.
     for obj in res.game_objects:
         obj.update(dt)
@@ -28,19 +36,12 @@ def update(dt):
                 obj1.handle_collision(-cx, -cy)
                 obj2.handle_collision(cx, cy)
             j += 1
-            obj2.label.x, obj2.label.y = obj2.x, obj2.y-30
         i += 1
+        obj1.bounce_off_borders()
+        # Update label positions.
         obj1.label.x, obj1.label.y = obj1.x, obj1.y-30
-        # Make objects bounce off borders
-        r = obj1.radius
-        minx, maxx, miny, maxy = config.fx0+r, config.fx1-r, config.fy0+r, config.fy1-r
-        if not minx < obj1.x < maxx:
-            obj1.vx *= -1
-        if not miny < obj1.y < maxy:
-            obj1.vy *= -1
-        obj1.x = min(max(obj1.x, minx), maxx)
-        obj1.y = min(max(obj1.y, miny), maxy)
     for obj in res.game_objects:
+        # Give each robot a chance to adjust its target.
         obj.adjust(res.ball.x, res.ball.y)
 
 #fps_display = pyglet.clock.ClockDisplay()
