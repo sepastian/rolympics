@@ -79,4 +79,9 @@ Assuming you created the file `lib/rolympics/robots/my_robot.py`, edit that file
  class MyRobot(Robot):  # The name after class must be the same as the file name, in camel-case.
    def __init__(self,*args,**kwargs):
       self.name('My Robot') # Set the name/label of your new robot to a name you choose!
+      
+   def adjust(self, bx, by):
+      # Adjust the robots target self.tx/self.ty, given the position of the ball bx/by.
+      # The robots current position can be found in self.x/self.y.
+      pass
  ```
