@@ -1,11 +1,6 @@
 # rolympics
 
-```
-╔═══╗ ╔═══╗ ╔═══╗  
-║  ╔║══╗ ╔║══╗  ║  
-╚══║╝ ╚══║╝ ╚═══╝  
-   ╚═══╝ ╚═══╝  
-```
+![](resources/screenshot_01.png)
 
 ## Installation
 
